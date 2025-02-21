@@ -19,11 +19,13 @@ module "backup_vault" {
   }
 
   blob_storage_backup_policy = {
-    name               = "example-policy"
-    location           = "eastus"
-    retention_duration = "P30D"
+    "examplepolicy" = {
+      name               = "example-policy"
+      location           = "eastus"
+      retention_duration = "P30D"
+    }
   }
-
+  
   tags = {
     "Environment" = "Production"
     "Owner"       = "Team A"
