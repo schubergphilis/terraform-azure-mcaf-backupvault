@@ -11,16 +11,18 @@ variable "resource_group_name" {
 
 variable "backup_vault" {
   type = object({
-    name       = string
-    location   = string
-    redundancy = string
+    name                       = string
+    location                   = string
+    redundancy                 = string
+    immutability               = string // accepted values are "Disabled"", "Locked", "Unlocked" 
+    soft_delete_retention_days = number
+    cmk_key_vault_key_id       = optional(string, null)
   })
 }
 
 variable "blob_storage_backup_policy" {
   type = map(object({
-    name               = string
-    location           = string
-    retention_duration = string
+    retention_duration              = string
+    backup_repeating_time_intervals = list(string) // example ["R/2025-02-21T14:00:00+00:00/P1D"]
   }))
 }
