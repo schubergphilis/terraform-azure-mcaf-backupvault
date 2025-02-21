@@ -25,7 +25,7 @@ module "backup_vault" {
       retention_duration = "P30D"
     }
   }
-  
+
   tags = {
     "Environment" = "Production"
     "Owner"       = "Team A"
