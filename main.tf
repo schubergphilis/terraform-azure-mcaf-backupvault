@@ -25,7 +25,3 @@ resource "azurerm_data_protection_backup_vault_customer_managed_key" "this" {
   data_protection_backup_vault_id = azurerm_data_protection_backup_vault.this.id
   key_vault_key_id                = var.backup_vault.cmk_key_vault_key_id
 }
-
-output "backup_vault_identity" {
-  value = azurerm_data_protection_backup_vault.this.identity[0].principal_id
-}
