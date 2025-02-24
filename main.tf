@@ -8,13 +8,9 @@ resource "azurerm_data_protection_backup_vault" "this" {
   cross_region_restore_enabled = true
   retention_duration_in_days   = var.backup_vault.soft_delete_retention_days
 
-
-
   identity {
     type = "SystemAssigned"
   }
-
-
 
   tags = merge(
     try(var.tags, {}),
@@ -28,10 +24,4 @@ resource "azurerm_data_protection_backup_vault_customer_managed_key" "this" {
   count                           = var.backup_vault.cmk_key_vault_key_id != null ? 1 : 0
   data_protection_backup_vault_id = azurerm_data_protection_backup_vault.this.id
   key_vault_key_id                = var.backup_vault.cmk_key_vault_key_id
-}
-
-resource "azurerm_role_assignment" "this" {
-scope               = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
-  role_definition_name = "Key Vault Crypto Officer"
-  principal_id        = azurerm_data_protection_backup_vault.this.identity[0].principal_id
 }
