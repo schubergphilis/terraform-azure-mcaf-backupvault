@@ -29,3 +29,9 @@ resource "azurerm_data_protection_backup_vault_customer_managed_key" "this" {
   data_protection_backup_vault_id = azurerm_data_protection_backup_vault.this.id
   key_vault_key_id                = var.backup_vault.cmk_key_vault_key_id
 }
+
+resource "azurerm_role_assignment" "this" {
+scope               = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
+  role_definition_name = "Key Vault Crypto Officer"
+  principal_id        = azurerm_data_protection_backup_vault.this.identity[0].principal_id
+}
