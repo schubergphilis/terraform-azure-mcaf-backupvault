@@ -36,5 +36,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_system_assigned_identity_id"></a> [system\_assigned\_identity\_id](#output\_system\_assigned\_identity\_id) | n/a |
 <!-- END_TF_DOCS -->
