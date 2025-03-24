@@ -21,7 +21,7 @@ resource "azurerm_data_protection_backup_vault" "this" {
 }
 
 resource "azurerm_data_protection_backup_vault_customer_managed_key" "this" {
-  count                           = var.backup_vault.cmk_key_vault_key_id != null ? 1 : 0
+  count                           = try(var.backup_vault.cmk_key_vault_key_id != null && var.backup_vault.cmk_key_vault_key_id != "", 0) ? 1 : 0
   data_protection_backup_vault_id = azurerm_data_protection_backup_vault.this.id
   key_vault_key_id                = var.backup_vault.cmk_key_vault_key_id
 }
