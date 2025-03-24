@@ -1,7 +1,3 @@
-locals {
-  enable_cmk = lookup(var.backup_vault, "cmk_key_vault_key_id", null) != null && lookup(var.backup_vault, "cmk_key_vault_key_id", "") != ""
-}
-
 resource "azurerm_data_protection_backup_vault" "this" {
   name                         = var.backup_vault.name
   resource_group_name          = var.resource_group_name
@@ -25,7 +21,7 @@ resource "azurerm_data_protection_backup_vault" "this" {
 }
 
 resource "azurerm_data_protection_backup_vault_customer_managed_key" "this" {
-  count                           = local.enable_cmk ? 1 : 0
+  count                           = var.enable_customer_managed_key ? 1 : 0
   data_protection_backup_vault_id = azurerm_data_protection_backup_vault.this.id
   key_vault_key_id                = var.backup_vault.cmk_key_vault_key_id
 }

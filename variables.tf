@@ -14,10 +14,16 @@ variable "backup_vault" {
     name                       = string
     location                   = string
     redundancy                 = string
-    immutability               = string // accepted values are "Disabled"", "Locked", "Unlocked" 
+    immutability               = string // accepted values are "Disabled"", "Locked", "Unlocked"
     soft_delete_retention_days = number
     cmk_key_vault_key_id       = optional(string, null)
   })
+}
+
+variable "enable_customer_managed_key" {
+  type        = bool
+  description = "Whether to enable customer managed key for the backup vault."
+  default     = false
 }
 
 variable "blob_storage_backup_policy" {
