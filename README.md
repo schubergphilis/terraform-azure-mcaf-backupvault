@@ -29,9 +29,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_backup_vault"></a> [backup\_vault](#input\_backup\_vault) | n/a | <pre>object({<br>    name                       = string<br>    location                   = string<br>    redundancy                 = string<br>    immutability               = string // accepted values are "Disabled"", "Locked", "Unlocked" <br>    soft_delete_retention_days = number<br>    cmk_key_vault_key_id       = optional(string, null)<br>  })</pre> | n/a | yes |
+| <a name="input_backup_vault"></a> [backup\_vault](#input\_backup\_vault) | n/a | <pre>object({<br>    name                       = string<br>    location                   = string<br>    redundancy                 = string<br>    immutability               = string // accepted values are "Disabled"", "Locked", "Unlocked"<br>    soft_delete_retention_days = number<br>    cmk_key_vault_key_id       = optional(string, null)<br>  })</pre> | n/a | yes |
 | <a name="input_blob_storage_backup_policy"></a> [blob\_storage\_backup\_policy](#input\_blob\_storage\_backup\_policy) | n/a | <pre>map(object({<br>    retention_duration              = string<br>    backup_repeating_time_intervals = list(string) // example ["R/2025-02-21T14:00:00+00:00/P1D"]<br>  }))</pre> | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which the Recovery Services Vault should be created. | `string` | n/a | yes |
+| <a name="input_enable_customer_managed_key"></a> [enable\_customer\_managed\_key](#input\_enable\_customer\_managed\_key) | Whether to enable customer managed key for the backup vault. | `bool` | `false` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources. | `map(string)` | `{}` | no |
 
 ## Outputs
