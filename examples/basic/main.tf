@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.7"
+  required_version = ">= 1.9"
 
   required_providers {
     azurerm = {
@@ -23,7 +23,6 @@ module "backup_vault" {
 
   blob_storage_backup_policy = {
     "examplepolicy" = {
-      name                            = "example-policy"
       retention_duration              = "P30D"
       backup_repeating_time_intervals = ["R/2025-02-21T14:00:00+00:00/P1D"]
     }
