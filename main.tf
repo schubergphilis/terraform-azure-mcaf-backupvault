@@ -13,7 +13,7 @@ resource "azurerm_data_protection_backup_vault" "this" {
   }
 
   tags = merge(
-    try(var.tags, {}),
+    var.tags,
     tomap({
       "Resource Type" = "Backup Vault"
     })
