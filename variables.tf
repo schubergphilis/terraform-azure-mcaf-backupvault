@@ -10,6 +10,14 @@ variable "resource_group_name" {
 }
 
 variable "backup_vault" {
+  type = object({
+    name                       = string
+    location                   = string
+    redundancy                 = string
+    immutability               = string
+    soft_delete_retention_days = number
+    cmk_key_vault_key_id       = optional(string, null)
+  })
   description = <<BACKUP_VAULT
 This variable is an object used to configure the Azure Data Protection Backup Vault.
 
@@ -31,14 +39,6 @@ backup_vault = {
 }
 ```
 BACKUP_VAULT
-  type = object({
-    name                       = string
-    location                   = string
-    redundancy                 = string
-    immutability               = string
-    soft_delete_retention_days = number
-    cmk_key_vault_key_id       = optional(string, null)
-  })
 }
 
 variable "enable_customer_managed_key" {
@@ -48,6 +48,10 @@ variable "enable_customer_managed_key" {
 }
 
 variable "blob_storage_backup_policy" {
+  type = map(object({
+    retention_duration              = string
+    backup_repeating_time_intervals = list(string)
+  }))
   description = <<BLOB_STORAGE_BACKUP_POLICY
 A map of blob storage backup policies to create for the Backup Vault. The map key is used as the policy name.
 
@@ -63,8 +67,4 @@ blob_storage_backup_policy = {
 }
 ```
 BLOB_STORAGE_BACKUP_POLICY
-  type = map(object({
-    retention_duration              = string
-    backup_repeating_time_intervals = list(string)
-  }))
 }
