@@ -8,6 +8,7 @@ variables {
     location                   = "westeurope"
     redundancy                 = "GeoRedundant"
     immutability               = "Unlocked"
+    soft_delete                = "On"
     soft_delete_retention_days = 14
     cmk_key_vault_key_id       = "https://my-keyvault.vault.azure.net/keys/my-key/abc123"
   }

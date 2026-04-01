@@ -15,7 +15,8 @@ variable "backup_vault" {
     location                   = string
     redundancy                 = string
     immutability               = string
-    soft_delete_retention_days = number
+    soft_delete                = optional(string, "On")
+    soft_delete_retention_days = optional(number, 14)
     cmk_key_vault_key_id       = optional(string, null)
   })
   description = <<BACKUP_VAULT
@@ -25,7 +26,8 @@ This variable is an object used to configure the Azure Data Protection Backup Va
 - `location`                   (Required) - The Azure region where the Backup Vault should be created.
 - `redundancy`                 (Required) - The redundancy setting for the Backup Vault. Allowed values are `GeoRedundant`, `LocallyRedundant`, and `ZoneRedundant`.
 - `immutability`               (Required) - The immutability setting for the Backup Vault. Allowed values are `Disabled`, `Locked`, and `Unlocked`.
-- `soft_delete_retention_days` (Required) - The number of days for which soft-deleted backups are retained.
+- `soft_delete`                (Optional) - The state of soft delete for this Backup Vault. Allowed values are `AlwaysOn`, `Off`, and `On`. Defaults to `On`.
+- `soft_delete_retention_days` (Optional) - The number of days for which soft-deleted backups are retained. Defaults to `14`. Required when `soft_delete` is not `Off`.
 - `cmk_key_vault_key_id`       (Optional) - The ID of the Key Vault Key used for customer-managed key encryption. Required when `enable_customer_managed_key` is `true`.
 
 ```hcl
@@ -34,6 +36,7 @@ backup_vault = {
   location                   = "westeurope"
   redundancy                 = "GeoRedundant"
   immutability               = "Disabled"
+  soft_delete                = "On"
   soft_delete_retention_days = 14
   cmk_key_vault_key_id       = null
 }

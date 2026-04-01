@@ -8,6 +8,7 @@ variables {
     location                   = "westeurope"
     redundancy                 = "GeoRedundant"
     immutability               = "Disabled"
+    soft_delete                = "On"
     soft_delete_retention_days = 14
   }
 
@@ -59,6 +60,11 @@ run "creates_backup_vault" {
   assert {
     condition     = azurerm_data_protection_backup_vault.this.cross_region_restore_enabled == true
     error_message = "Cross region restore should always be enabled."
+  }
+
+  assert {
+    condition     = azurerm_data_protection_backup_vault.this.soft_delete == "On"
+    error_message = "Soft delete state does not match expected value."
   }
 
   assert {
