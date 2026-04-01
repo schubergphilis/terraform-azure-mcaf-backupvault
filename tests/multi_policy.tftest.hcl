@@ -8,6 +8,7 @@ variables {
     location                   = "westeurope"
     redundancy                 = "LocallyRedundant"
     immutability               = "Disabled"
+    soft_delete                = "On"
     soft_delete_retention_days = 14
   }
 

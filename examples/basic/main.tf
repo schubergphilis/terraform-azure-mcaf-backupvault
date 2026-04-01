@@ -18,6 +18,7 @@ module "backup_vault" {
     location                   = "westeurope"
     redundancy                 = "GeoRedundant"
     immutability               = "Disabled"
+    soft_delete                = "On"
     soft_delete_retention_days = 14
   }
 

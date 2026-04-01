@@ -6,7 +6,8 @@ resource "azurerm_data_protection_backup_vault" "this" {
   redundancy                   = var.backup_vault.redundancy
   immutability                 = var.backup_vault.immutability
   cross_region_restore_enabled = true
-  retention_duration_in_days   = var.backup_vault.soft_delete_retention_days
+  soft_delete                  = var.backup_vault.soft_delete
+  retention_duration_in_days   = var.backup_vault.soft_delete == "Off" ? null : var.backup_vault.soft_delete_retention_days
 
   identity {
     type = "SystemAssigned"
